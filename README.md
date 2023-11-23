@@ -1,3 +1,51 @@
+# 概要
+
+TypeScriptでReactを用いてウェブアプリケーションを開発したことがなかったので、練習として作成。
+
+以下のサイトを参考にしています。
+[Reactの公式チュートリアル](https://ja.react.dev/learn/tutorial-tic-tac-toe)
+[React公式チュートリアルをTypeScriptで（Hooks導入以後）](https://zenn.dev/roiban/articles/473f9cbf2b793a#game%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%8D%E3%83%B3%E3%83%88)
+
+# 技術的学び
+
+## テンプレートの作成
+
+`npx create-react-app ディレクトリ名 --template typescript`
+
+## propsの扱い方
+
+```
+type SquareProps = {
+    value: SquareState;
+    onClick: () => void;
+}
+
+export default function Square(props: SquareProps) {
+    return (
+        <button className="square" onClick={props.onClick}>
+            {props.value}
+        </button>
+    );
+}
+
+/* propsを渡す側 */
+<Square value={value} onClick={handleClick} />
+```
+このように、propsの型を宣言するのが基本（らしい）。
+そして、渡す側ではオブジェクト型とかは気にせず普通に個別で渡せる。
+（つまり、`props={{value= ...}}`などと記述する必要はない）
+
+## useStateの使い方
+
+```
+const [state, setState] = useState<データ型>(initialState);
+```
+また、複数の状態変数を一つのオブジェクトにまとめるほうが良い。
+なぜなら、一つずつだと、ChromeのReactの開発者ツール上で変数名が表示されず、一様にただStateとして扱われてしまい、見分けがつかないから。
+オブジェクトで宣言することで、キーで見分けがつくようになる。
+
+***
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
